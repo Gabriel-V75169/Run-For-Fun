@@ -19,7 +19,7 @@
     
 ## Installation
     
-  [Repository](https://github.com/Gabriel-V75169/To-Be-Determinied)
+  [Repository](https://github.com/Gabriel-V75169/Run-For-Fun)
     
 ## Usage
     
