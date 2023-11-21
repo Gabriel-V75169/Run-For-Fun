@@ -19,46 +19,46 @@ db.once('open', async () => {
 
   const products = await Product.insertMany([
     {
-      name: 'Tin of Cookies',
+      name: '12 Ks of Christmas',
       description:
-        'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+        'A fun, festive romp through the 12 Ks of Christmas. A great gift for the runner in your life!',
       image: 'cookie-tin.jpg',
       category: categories[0]._id,
       price: 2.99,
       quantity: 500
     },
     {
-      name: 'Canned Coffee',
+      name: 'The Infinity Gauntlet',
       description:
-        'Praesent sed lacinia mauris. Nulla congue nibh magna, at feugiat nunc scelerisque quis. Donec iaculis rutrum vulputate. Suspendisse lectus sem, vulputate ac lectus sed, placerat consequat dui.',
+        'A race medal worthy of the Mad Titan himself. This medal is sure to be the crown jewel of your collection.',
       image: 'canned-coffee.jpg',
       category: categories[0]._id,
       price: 1.99,
       quantity: 500
     },
     {
-      name: 'Toilet Paper',
+      name: 'Marathon Challenge',
       category: categories[1]._id,
       description:
-        'Donec volutpat erat erat, sit amet gravida justo sodales in. Phasellus tempus euismod urna. Proin ultrices nisi ut ipsum congue, vitae porttitor libero suscipit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam lacinia a nisi non congue.',
+        'A tough race consisting of 26 grueling miles. Put yourself to the ultimate test!',
       image: 'toilet-paper.jpg',
       price: 7.99,
       quantity: 20
     },
     {
-      name: 'Handmade Soap',
+      name: 'Zombie Run',
       category: categories[1]._id,
       description:
-        'Praesent placerat, odio vel euismod venenatis, lectus arcu laoreet felis, et fringilla sapien turpis vestibulum nisl.',
+        'The dead have risen and are hungry for brains. Can you outrun them?',
       image: 'soap.jpg',
       price: 3.99,
       quantity: 50
     },
     {
-      name: 'Set of Wooden Spoons',
+      name: 'The Shire Challenge',
       category: categories[1]._id,
       description:
-        'Vivamus ut turpis in purus pretium mollis. Donec turpis odio, semper vel interdum ut, vulputate at ex. Duis dignissim nisi vel tortor imperdiet finibus. Aenean aliquam sagittis rutrum.',
+        'A peaceful run through the Shire. Be sure to stay on the path!',
       image: 'wooden-spoons.jpg',
       price: 14.99,
       quantity: 100
