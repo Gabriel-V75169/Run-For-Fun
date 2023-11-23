@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const productSchema = new Schema({
+const raceSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -24,13 +24,13 @@ const productSchema = new Schema({
     min: 0,
     default: 0
   },
-  category: {
+  distance: {
     type: Schema.Types.ObjectId,
-    ref: 'Category',
+    ref: 'Distance',
     required: true
   }
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Race = mongoose.model('Race', raceSchema);
 
-module.exports = Product;
+module.exports = Race;

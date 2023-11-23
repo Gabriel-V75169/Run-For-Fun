@@ -25,6 +25,19 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
+  ageRange: {
+    type: String,
+    required: true,
+  },
+  racePreference: {
+    type: String,
+    required: true,
+  },
+  raceTimes: {
+    type: Number,
+    required: false,
+    minlength: 2
+  },
   orders: [Order.schema]
 });
 
