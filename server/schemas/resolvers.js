@@ -129,19 +129,25 @@ const resolvers = {
       );
     },
     login: async (parent, { email, password }) => {
+      console.log('Received login request:', email, password);
+
       const user = await User.findOne({ email });
 
       if (!user) {
+        console.log('User not found');
         throw AuthenticationError;
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
+        console.log('Incorrect password');
         throw AuthenticationError;
       }
 
       const token = signToken(user);
+
+      console.log('Login successful');
 
       return { token, user };
     },
