@@ -59,7 +59,7 @@ function CategoryMenu() {
           handleClick('');
         }}
       >
-        All
+        distance
       </button>
     </div>
   );
