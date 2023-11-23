@@ -129,7 +129,7 @@ const resolvers = {
       );
     },
     login: async (parent, { email, password }) => {
-      console.log('Received login request:', email, password);
+      console.log('Got that login request tryna figure it out:', email, password);
 
       const user = await User.findOne({ email });
 
