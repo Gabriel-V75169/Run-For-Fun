@@ -1,35 +1,41 @@
 const typeDefs = `
-  type Category {
-    _id: ID
-    name: String
+  type WelcomePage {
+    popularRunPackages: [RunPackage]
+    whatAreVirtualRuns: String
   }
 
-  type Product {
-    _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    category: Category
+  type Dashboard {
+    popularRunPackages: [RunPackage]
   }
 
-  type Order {
-    _id: ID
-    purchaseDate: String
-    products: [Product]
-  }
-
-  type User {
-    _id: ID
+  type UserProfile {
+    id: ID
     firstName: String
     lastName: String
     email: String
-    orders: [Order]
+    completedRaces: [String]
+    orderHistory: [Order]
+    raceTimes: [String]
   }
 
-  type Checkout {
-    session: ID
+  type RunPackage {
+    id: ID
+    name: String
+    distance: Float
+    price: Float
+  }
+
+  type Order {
+    id: ID
+    date: String
+    products: [Product]
+  }
+
+  type Product {
+    id: ID
+    name: String
+    description: String
+    price: Float
   }
 
   type Auth {
@@ -37,21 +43,24 @@ const typeDefs = `
     user: User
   }
 
+  type User {
+    id: ID
+    firstName: String
+    lastName: String
+    email: String
+  }
+
   type Query {
-    categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
-    user: User
-    order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
+    welcomePage: WelcomePage
+    dashboard: Dashboard
+    userProfile: UserProfile
   }
 
   type Mutation {
+    login(email: String!, password: String!): Auth
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addOrder(products: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
-    login(email: String!, password: String!): Auth
   }
 `;
 

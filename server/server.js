@@ -1,32 +1,80 @@
 const express = require('express');
-const { ApolloServer } = require('@apollo/server');
-const { expressMiddleware } = require('@apollo/server/express4');
+const { ApolloServer } = require('@apollo/server-express');
+const { expressMiddleware } = require('@apollo/server-express/dist');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
-
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
+const config = require('./config');
+mongoose.connect(config.mongoURI);
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: authMiddleware,
 });
 
-// Create a new instance of an Apollo server with the GraphQL schema
+app.post('/signup', async (req, res) => {
+  try {
+    res.status(201).json({ message: 'User registered' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'ANOTHER ERROR' });
+  }
+});
+
+app.post('/login', async (req, res) => {
+  try {
+    res.status(200).json({ token: 'your_generated_token', message: 'Logged in' });
+  } catch (error) {
+    console.error(error);
+    res.status(401).json({ error: 'Username or password is incorrect' });
+  }
+});
+
+app.post('/logout', async (req, res) => {
+  try {
+    res.status(200).json({ message: 'Logged out' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'ANOTHER ERROR' });
+  }
+});
+
+app.get('/profile', async (req, res) => {
+  try {
+    res.status(200).json({ user: /* DATA */ });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'ANOTHER ERROR' });
+  }
+});
+
+app.get('/order-history', async (req, res) => {
+  try {
+    res.status(200).json({ orders: /* ORDER HISTORYYYYY */ });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Another error i still need to change the name of' });  //Change error message
+  }
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Generalized error' }); //change error
+});
+
 const startApolloServer = async () => {
   await server.start();
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
-  // Serve up static assets
   app.use('/images', express.static(path.join(__dirname, '../client/images')));
 
-  app.use('/graphql', expressMiddleware(server, {
-    context: authMiddleware
-  }));
+  app.use('/graphql', expressMiddleware(server));
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
@@ -44,5 +92,4 @@ const startApolloServer = async () => {
   });
 };
 
-// Call the async function to start the server
 startApolloServer();
