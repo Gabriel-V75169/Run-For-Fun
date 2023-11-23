@@ -44,21 +44,35 @@ app.post('/logout', async (req, res) => {
   }
 });
 
-app.get('/profile', async (req, res) => {
+app.get('/profile', authMiddleware, async (req, res) => {
   try {
-    res.status(200).json({ user: /* DATA */ });
+    const user = req.user;
+
+    if (!user) {
+      return res.status(401).json({ error: 'Not the user' });
+    }
+
+    res.status(200).json({ user });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'ANOTHER ERROR' });
+    res.status(500).json({ error: 'Error' });
   }
 });
 
-app.get('/order-history', async (req, res) => {
+app.get('/order-history', authMiddleware, async (req, res) => {
   try {
-    res.status(200).json({ orders: /* ORDER HISTORYYYYY */ });
+    const user = req.user;
+
+    if (!user) {
+      return res.status(401).json({ error: 'Not the user' });
+    }
+
+    const orders = user.orders;
+
+    res.status(200).json({ orders });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Another error i still need to change the name of' });  //Change error message
+    res.status(500).json({ error: 'Error' });
   }
 });
 
