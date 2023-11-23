@@ -35,13 +35,13 @@ const typeDefs = `
     session: ID
   }
 
-  // when they sign up [implemetent security of the password [... utils/auth.js]
+  # when they sign up [implemetent security of the password [... utils/auth.js]
   type Auth {
     token: ID
     user: User
   }
 
-  type Query {
+  type Query { 
     distance: [Distance]
     race(distance: ID, name: String): [Race]
     race(_id: ID!): Race
@@ -50,16 +50,14 @@ const typeDefs = `
     checkout(race: [ID]!): Checkout
   }
 
-  type Mutation {
+  type Mutation { 
     addUser(firstName: String!, lastName: String!, email: String!, password: String!, ageRange: String!): Auth
     
     addOrder(race: [ID]!): Order
     
-    updateUser(firstName: String, lastName: String, email: String, 
+    updateUser(firstName: String, lastName: String, email: String, password: String, ageRange: String): User
     
-      password: String,ageRange: String): User
-    
-      // updateRace(_id: ID!, quantity: Int!): Race
+    # updateRace(_id: ID!, quantity: Int!): Race
     login(email: String!, password: String!): Auth
   }
 `;
