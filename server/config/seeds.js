@@ -23,6 +23,7 @@ db.once('open', async () => {
       category: categories[0]._id,
       price: 25.99,
       quantity: 500
+
     },
     {
       name: 'The Infinity Gauntlet',
@@ -31,7 +32,8 @@ db.once('open', async () => {
       image: '/images/InfinityGauntlet(4).jpg',
       category: categories[0]._id,
       price: 25.99,
-      quantity: 500
+      quantity: 500,
+      distance: "10k"
     },
     {
       name: 'Marathon Challenge',
@@ -40,7 +42,8 @@ db.once('open', async () => {
         'A tough race consisting of 26 grueling miles. Put yourself to the ultimate test!',
       image: '/images/MarathonChallenge.png',
       price: 25.99,
-      quantity: 500
+      quantity: 500,
+      distance: "4k"
     },
     {
       name: 'Zombie Run',
@@ -49,7 +52,8 @@ db.once('open', async () => {
         'The dead have risen and are hungry for brains. Can you outrun them?',
       image: '/images/MZMBRN_NR.jpg',
       price: 25.99,
-      quantity: 500
+      quantity: 500,
+      distance:"5k"
     },
     {
       name: 'The Shire Challenge',
@@ -58,7 +62,8 @@ db.once('open', async () => {
         'A peaceful run through the Shire. Be sure to stay on the path!',
       image: '/images/SHR-Front-Medal-min.png',
       price: 25.99,
-      quantity: 500
+      quantity: 500,
+      distance: "10k"
     }
   ]);
 

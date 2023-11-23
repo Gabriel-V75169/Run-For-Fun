@@ -208,3 +208,14 @@ input:focus {
     width: 100%;
   }
 }
+
+.my-1{
+  background-color: rgb(146, 223, 146);
+}
+.my-2{
+  background-color: rgb(127, 186, 244);
+}
+
+.mx-1{
+  margin-left: 1300px;
+}
