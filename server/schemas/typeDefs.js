@@ -42,8 +42,8 @@ const typeDefs = `
   }
 
   type Query { 
-    distance: [Distance]
-    race(distance: ID, name: String): [Race]
+    distances: [Distance]
+    races(distance: ID, name: String): [Race]
     race(_id: ID!): Race
     user: User
     order(_id: ID!): Order

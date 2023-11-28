@@ -1,5 +1,20 @@
 import { gql } from '@apollo/client';
 
+export const GET_RACES = gql`
+query Query($distance: ID, $name: String) {
+  races(distance: $distance, name: $name) {
+    description
+    distance {
+      _id
+      name
+    }
+    image
+    name
+    price
+    quantity
+  }
+}`;
+
 export const QUERY_PRODUCTS = gql`
   query getProducts($category: ID) {
     products(category: $category) {
@@ -39,13 +54,14 @@ export const QUERY_ALL_PRODUCTS = gql`
   }
 `;
 
-export const QUERY_CATEGORIES = gql`
-  {
-    categories {
-      _id
-      name
-    }
+
+export const QUERY_DISTANCES = gql`
+query Distances {
+  distances {
+    _id
+    name
   }
+}
 `;
 
 export const QUERY_USER = gql`

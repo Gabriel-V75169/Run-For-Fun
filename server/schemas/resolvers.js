@@ -9,7 +9,7 @@ const resolvers = {
     distances: async () => {
       return await Distance.find();
     },
-    race: async (parent, { distance, name }) => {
+    races: async (parent, { distance, name }) => {
       const params = {};
 
       if (distance) {
@@ -119,15 +119,15 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    updateRace: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
-
-      return await Race.findByIdAndUpdate(
-        _id,
-        { $inc: { quantity: decrement } },
-        { new: true }
-      );
-    },
+    //updateRace: async (parent, { _id, quantity }) => {
+    //  const decrement = Math.abs(quantity) * -1;
+//
+    //  return await Race.findByIdAndUpdate(
+    //    _id,
+    //    { $inc: { quantity: decrement } },
+    //    { new: true }
+    //  );
+    //},
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

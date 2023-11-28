@@ -3,7 +3,7 @@ import ProductItem from '../ProductItem';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_PRODUCTS } from '../../utils/queries';
+import { QUERY_PRODUCTS, GET_RACES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
 
@@ -12,15 +12,16 @@ function ProductList() {
 
   const { currentCategory } = state;
 
-  const { loading, data } = useQuery(QUERY_PRODUCTS);
+  const { loading, data } = useQuery(GET_RACES);
 
   useEffect(() => {
     if (data) {
       dispatch({
         type: UPDATE_PRODUCTS,
-        products: data.products,
+        products: data.races,
       });
-      data.products.forEach((product) => {
+      console.log(data);
+      data.races.forEach((product) => {
         idbPromise('products', 'put', product);
       });
     } else if (!loading) {
@@ -37,9 +38,10 @@ function ProductList() {
     if (!currentCategory) {
       return state.products;
     }
-
+    console.log(currentCategory)
+    console.log(state.products)
     return state.products.filter(
-      (product) => product.category._id === currentCategory
+      (product) => product.distance._id === currentCategory
     );
   }
 
