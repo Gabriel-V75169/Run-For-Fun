@@ -54,13 +54,7 @@ function CategoryMenu() {
           {item.name}
         </button>
       ))}
-      <button
-        onClick={() => {
-          handleClick('');
-        }}
-      >
-        distance
-      </button>
+      
     </div>
   );
 }
