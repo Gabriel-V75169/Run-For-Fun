@@ -1,23 +1,23 @@
 const typeDefs = `
-  type Category {
+  type Distance {
     _id: ID
     name: String
   }
 
-  type Product {
+  type Race {
     _id: ID
     name: String
     description: String
     image: String
     quantity: Int
+    distance: Distance
     price: Float
-    category: Category
   }
 
   type Order {
     _id: ID
     purchaseDate: String
-    products: [Product]
+    race: [Race]
   }
 
   type User {
@@ -25,34 +25,42 @@ const typeDefs = `
     firstName: String
     lastName: String
     email: String
+    ageRange: String 
     orders: [Order]
+    racePreference: String
+    raceTimes: Int
   }
 
   type Checkout {
     session: ID
   }
 
+  # when they sign up [implemetent security of the password [... utils/auth.js]
   type Auth {
     token: ID
     user: User
   }
 
-  type Query {
-    categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
+  type Query { 
+    distance: [Distance]
+    race(distance: ID, name: String): [Race]
+    race(_id: ID!): Race
     user: User
     order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
+    checkout(race: [ID]!): Checkout
   }
 
-  type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
+  type Mutation { 
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!, ageRange: String!): Auth
+    
+    addOrder(race: [ID]!): Order
+    
+    updateUser(firstName: String, lastName: String, email: String, password: String, ageRange: String): User
+    
+    # updateRace(_id: ID!, quantity: Int!): Race
     login(email: String!, password: String!): Auth
   }
 `;
 
-module.exports = typeDefs;
+module.exports = typeDefs; 
+

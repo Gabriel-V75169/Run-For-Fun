@@ -1,4 +1,4 @@
-const { User, Product, Category, Order } = require("../models");
+const { User, Race, Distance, Order } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 const stripe = require("stripe")(
   "sk_test_51MmUhiJWBUm8M1eN7zGH87OtGnQPi1BiZMFgpcHzpEQa86sUDL0pGs6mV9fuddjdJrEImyvK5tJCqexf4DBJOo5000BOOUZLm7"
@@ -6,14 +6,14 @@ const stripe = require("stripe")(
 
 const resolvers = {
   Query: {
-    categories: async () => {
-      return await Category.find();
+    distances: async () => {
+      return await Distance.find();
     },
-    products: async (parent, { category, name }) => {
+    race: async (parent, { distance, name }) => {
       const params = {};
 
-      if (category) {
-        params.category = category;
+      if (distance) {
+        params.distance = distance;
       }
 
       if (name) {
@@ -22,16 +22,16 @@ const resolvers = {
         };
       }
 
-      return await Product.find(params).populate("category");
+      return await Race.find(params).populate("distance");
     },
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate("category");
+    race: async (parent, { _id }) => {
+      return await Race.findById(_id).populate("distance");
     },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: "orders.products",
-          populate: "category",
+          path: "orders.races",
+          populate: "distance",
         });
 
         user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
@@ -44,8 +44,8 @@ const resolvers = {
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: "orders.products",
-          populate: "category",
+          path: "orders.races",
+          populate: "distance",
         });
 
         return user.orders.id(_id);
@@ -55,21 +55,21 @@ const resolvers = {
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
-      const order = new Order({ products: args.products });
+      const order = new Order({ races: args.races });
       const line_items = [];
 
-      const { products } = await order.populate("products");
+      const { races } = await order.populate("races");
 
-      for (let i = 0; i < products.length; i++) {
-        const product = await stripe.products.create({
-          name: products[i].name,
-          description: products[i].description,
-          images: [`${url}/images/${products[i].image}`],
+      for (let i = 0; i < races.length; i++) {
+        const race = await stripe.races.create({
+          name: races[i].name,
+          description: races[i].description,
+          images: [`${url}/images/${races[i].image}`],
         });
 
         const price = await stripe.prices.create({
-          product: product.id,
-          unit_amount: products[i].price * 100,
+          race: race.id,
+          unit_amount: races[i].price * 100,
           currency: "usd",
         });
 
@@ -97,9 +97,9 @@ const resolvers = {
 
       return { token, user };
     },
-    addOrder: async (parent, { products }, context) => {
+    addOrder: async (parent, { races }, context) => {
       if (context.user) {
-        const order = new Order({ products });
+        const order = new Order({ races });
 
         await User.findByIdAndUpdate(context.user._id, {
           $push: { orders: order },
@@ -119,10 +119,10 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    updateProduct: async (parent, { _id, quantity }) => {
+    updateRace: async (parent, { _id, quantity }) => {
       const decrement = Math.abs(quantity) * -1;
 
-      return await Product.findByIdAndUpdate(
+      return await Race.findByIdAndUpdate(
         _id,
         { $inc: { quantity: decrement } },
         { new: true }
