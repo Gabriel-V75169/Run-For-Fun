@@ -31,7 +31,7 @@ const userSchema = new Schema({
   },
   racePreference: {
     type: String,
-    required: false,
+    required: true,
   },
   raceTimes: {
     type: Number,

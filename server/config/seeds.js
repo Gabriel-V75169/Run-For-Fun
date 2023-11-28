@@ -15,7 +15,7 @@ db.once('open', async () => {
     { name: '25k' }
   ]);
 
-  console.log('categories seeded');
+  console.log('distances seeded');
 
   const races = await Race.insertMany([
     {
@@ -26,7 +26,6 @@ db.once('open', async () => {
       distance: distances[1]._id,
       price: 25.99,
       quantity: 500
-
     },
     {
       name: 'The Infinity Gauntlet',
