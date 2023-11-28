@@ -5,7 +5,7 @@ import {
   UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
 } from '../../utils/actions';
-import { QUERY_CATEGORIES } from '../../utils/queries';
+import { QUERY_DISTANCES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 
 function CategoryMenu() {
@@ -13,15 +13,15 @@ function CategoryMenu() {
 
   const { categories } = state;
 
-  const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
+  const { loading, data: distanceData } = useQuery(QUERY_DISTANCES);
 
   useEffect(() => {
-    if (categoryData) {
+    if (distanceData) {
       dispatch({
         type: UPDATE_CATEGORIES,
-        categories: categoryData.categories,
+        categories: distanceData.distances,
       });
-      categoryData.categories.forEach((category) => {
+      distanceData.distances.forEach((category) => {
         idbPromise('categories', 'put', category);
       });
     } else if (!loading) {
@@ -32,7 +32,7 @@ function CategoryMenu() {
         });
       });
     }
-  }, [categoryData, loading, dispatch]);
+  }, [distanceData, loading, dispatch]);
 
   const handleClick = (id) => {
     dispatch({
@@ -43,7 +43,7 @@ function CategoryMenu() {
 
   return (
     <div>
-      <h2>Choose a Category:</h2>
+      <h2>Choose a Distance:</h2>
       {categories.map((item) => (
         <button
           key={item._id}
@@ -54,13 +54,7 @@ function CategoryMenu() {
           {item.name}
         </button>
       ))}
-      <button
-        onClick={() => {
-          handleClick('');
-        }}
-      >
-        distance
-      </button>
+      
     </div>
   );
 }
