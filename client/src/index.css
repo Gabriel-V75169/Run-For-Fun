@@ -1,6 +1,6 @@
 :root {
-  --primary: #232F3E;
-  --secondary: #F3A847;
+  --primary: #0285bd;
+  --secondary: #63e76f;
   --tertiary: #B12704;
   --light: #fafafa;
   --dark: #272f32;
@@ -218,4 +218,10 @@ input:focus {
 
 .mx-1{
   margin-left: 1300px;
+}
+
+.images {
+  max-width: 250px;
+  display: flex;
+  flex-direction: row;
 }
