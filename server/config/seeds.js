@@ -83,6 +83,33 @@ db.once('open', async () => {
       distance: distances[1]._id,
     },
     {
+      name: 'Panda Run',
+      description:
+        'A fun run through the bamboo forest. Be sure to watch out for the pandas!',
+      image: '/images/pandarun.jpg',
+      price: 25.99,
+      quantity: 500,
+      distance: distances[4]._id,
+    },
+    {
+      name: 'Run from Extinction',
+      description:
+        'Can you outrun extinction? Find out in this fun run through the ages.',
+      image: '/images/runfromextinctionshopv2.jpg',
+      price: 25.99,
+      quantity: 500,
+      distance: distances[4]._id,
+    },
+    {
+      name: 'Gotta Run Em All',
+      description:
+        'Do you wanna be the very best? Like no one ever was? Then you gotta run em all!',
+      image: '/images/catchemall.jpg',
+      price: 25.99,
+      quantity: 500,
+      distance: distances[4]._id,
+    },
+    {
       name: 'The Shire Challenge',
       description:
         'A peaceful run through the Shire. Be sure to stay on the path!',
