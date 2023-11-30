@@ -51,7 +51,7 @@ const typeDefs = `
   }
 
   type Mutation { 
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!, ageRange: String!): Auth
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     
     addOrder(race: [ID]!): Order
     
