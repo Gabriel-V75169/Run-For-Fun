@@ -89,7 +89,7 @@ db.once('open', async () => {
       image: '/images/pandarun.jpg',
       price: 25.99,
       quantity: 500,
-      distance: distances[4]._id,
+      distance: distances[1]._id,
     },
     {
       name: 'Run from Extinction',
@@ -98,7 +98,7 @@ db.once('open', async () => {
       image: '/images/runfromextinctionshopv2.jpg',
       price: 25.99,
       quantity: 500,
-      distance: distances[4]._id,
+      distance: distances[0]._id,
     },
     {
       name: 'Gotta Run Em All',
@@ -107,7 +107,7 @@ db.once('open', async () => {
       image: '/images/catchemall.jpg',
       price: 25.99,
       quantity: 500,
-      distance: distances[4]._id,
+      distance: distances[1]._id,
     },
     {
       name: 'The Shire Challenge',
