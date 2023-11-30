@@ -3,9 +3,9 @@ const { User, Race, Distance } = require('../models');
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
-  //await cleanDB('Category', 'categories');
-  //await cleanDB('Product', 'products');
-  //await cleanDB('User', 'users');
+  await cleanDB('Distance', 'distances');
+  await cleanDB('Race', 'races');
+  await cleanDB('User', 'users');
 
   const distances = await Distance.insertMany([
     { name: '5k' },
